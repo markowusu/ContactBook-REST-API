@@ -8,18 +8,23 @@ from rest_framework.decorators import api_view
 from.addressBookSerializers import AddressBookSerializers, FileSerializer, FileUploadSerializer
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
-import csv, io
+import csv, io, os
 import pandas as pd 
+from .utils.sendEmail import sendEmail
+from dotenv import load_dotenv
+
+load_dotenv()
+ADMIN_EMAIL = str(os.getenv('ADMIN_EMAIL'))
 
 
 @api_view(['GET','POST'])
 def create_contact(request):
     if request.method == 'GET':
         paginator = PageNumberPagination()
-        paginator.page_size = 20
+        paginator.page_size = 19   # setting to 20 return 21 items but 19 return just 20 items
         contacts = AddressBook.objects.all()
         result_page = paginator.paginate_queryset(contacts, request)
-        serializer = AddressBookSerializers(contacts, many=True)
+        serializer = AddressBookSerializers(result_page, many=True)
         return paginator.get_paginated_response(serializer.data)
         
 
@@ -104,9 +109,8 @@ class FileView(generics.CreateAPIView):
             new_file = AddressBook(
                 first_name = row["first_name"],
             last_name= row["last_name"],
-           date_added = row["date_added"],
             phone_number= row["phone_number"]
             )
-        new_file.save()   
-
+            new_file.save()   
+        sendEmail("maaddae@nalosolutions.com")
         return Response({"status": "success"},status= status.HTTP_201_CREATED) 
