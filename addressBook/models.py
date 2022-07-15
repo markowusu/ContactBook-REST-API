@@ -9,3 +9,12 @@ class AddressBook(models.Model):
 
     def __str__(self):
         return self.phone_number
+
+class File(models.Model):
+    file = models.FileField(blank=False, null = False)
+    description = models.CharField(max_length = 100)
+    timestamp = models.DateField(auto_now_add = True)
+    email = models.EmailField(blank=False, null = False)
+
+    def __str__(self):
+        return self.file

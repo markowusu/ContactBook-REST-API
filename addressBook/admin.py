@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-# Register your models here.
-from .models import AddressBook
+from .models import AddressBook, File
+from django.contrib import admin
 
 admin.site.register(AddressBook)
