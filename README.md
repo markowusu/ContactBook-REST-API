@@ -53,11 +53,11 @@ ModuleNotFoundError: No module named 'appname'
 
 | url        |               |          |
 | ------------- |:-------------:| -----:|
-| GET  http://localhost:8000/contacts     | returns lits of 20 contacts in the db per page |  |
-| GET http://localhost:8000/contacts/{id} | return the user and its contacts via id 
-| POST http://localhost:8000/contacts     | to create a new contact with {first_name,last_name,phone_number}  as body      |    |
-| POST http://localhost:8000/contacts/upload-csv     | this is used to upload the csv-file
-| DElETE http://localhost:8000/contacts/{id}   | It  deletes by id   |   |
+| GET  `http://localhost:8000/contacts`     | returns lits of 20 contacts in the db per page |  |
+| GET `http://localhost:8000/contacts/{id}` | return the user and its contacts via id 
+| POST `http://localhost:8000/contacts`     | to create a new contact with {first_name,last_name,phone_number}  as body      |    |
+| POST `http://localhost:8000/contacts/upload-csv`     | this is used to upload the csv-file
+| DELETE `http://localhost:8000/contacts/{id}`   | It  deletes by id   |   |
 
 Architecture:
 I did not really use any achicture design in this implementation but future updates may require a hexagonal architecture(Ports and Adapters)--
@@ -74,4 +74,4 @@ I used Twillio for sending email to any ADMIN_EMAIL set in the .evn file.
 API DOCS
 --
 
-For API docs vist `docs/` this provides you with the swagger docs for for each of the endpoints in the application.
+For API docs vist `http://localhost:8000/docs` this provides you with the swagger docs for for each of the endpoints in the application.
