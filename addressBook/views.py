@@ -9,12 +9,16 @@ from.addressBookSerializers import AddressBookSerializers, FileSerializer, FileU
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 import csv, io, os
+from rest_framework_swagger.views import get_swagger_view
 import pandas as pd 
 from .utils.sendEmail import sendEmail
 from dotenv import load_dotenv
 
 load_dotenv()
 ADMIN_EMAIL = str(os.getenv('ADMIN_EMAIL'))
+
+
+swagger_view = get_swagger_view(title="Contact Book API")
 
 
 @api_view(['GET','POST'])
